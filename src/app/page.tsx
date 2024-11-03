@@ -1,4 +1,3 @@
-import Navlink from "../components/nav/navlink";
 import Image from "next/image";
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
           height={38}
           priority
         />
-        <Navlink/>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Em primeiro lugar, esse vai ser o melhor projeto de PP2 de todos.{" "}
