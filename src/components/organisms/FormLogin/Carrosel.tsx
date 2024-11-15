@@ -28,7 +28,7 @@ const Carrosel: React.FC = () => {
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 ">
             <div className="p-1">
               <Card className="flex-1 w-full max-w-lg mx-auto p-6">
 
