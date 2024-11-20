@@ -91,7 +91,7 @@ const FormLogin: React.FC = () => {
   }
 
   return (
-    <Card className="w-full bg-gray-200 max-w-lg mx-auto p-6">
+    <Card className="w-full bg-white max-w-lg mx-auto p-6">
       <CardHeader>
         <CardTitle className="text-4xl font-bold">
           {isLoggingIn ? (

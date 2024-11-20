@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import FormLogin from '@/components/organisms/FormLogin/FormLogin';
+import FormLogin from '@/components/organisms/FormLogin/FormRegister';
+import FormRegister from '@/components/organisms/FormLogin/FormRegister';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -14,8 +15,8 @@ const LoginPage = () => {
 
     return (
         <div className="flex h-screen bg-white 
-        bg-cover bg-center" style={{ backgroundImage: "url('/img/bg.png')" }} 
-        // style={{ backgroundImage: "url('/img/bg.png')" }}
+        bg-cover bg-center" 
+        style={{ backgroundImage: "url('/img/bg.png')" }}
         >
             {/* Coluna esquerda com a logo, com fundo translúcido opcional */}
             <div className="flex flex-col items-center justify-center w-1/2 h-full bg-black bg-opacity-50">
@@ -28,7 +29,7 @@ const LoginPage = () => {
 
             {/* Coluna direita com um contêiner menor para o formulário de login */}
             <div className="flex items-center justify-center w-1/2 h-full bg-black bg-opacity-50">
-                <FormLogin />
+                <FormRegister />
             </div>
         </div >
     );
