@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import FormLogin from '@/components/organisms/FormLogin/FormLogin';
+import FormLogin from '@/components/organisms/FormLogin/FormRegister';
 import Carrosel from '@/components/organisms/FormLogin/Carrosel';
 
 const HomePage = () => {
