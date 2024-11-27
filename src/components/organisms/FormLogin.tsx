@@ -87,7 +87,9 @@ const FormLogin: React.FC = () => {
 
   function loginGoogle() {
     let log_google = document.querySelector('#logingoogle');
-    log_google.click();
+    if (log_google) {
+      (log_google as HTMLElement).click();
+    }
   }
 
   return (
@@ -151,9 +153,8 @@ const FormLogin: React.FC = () => {
             className="space-y-4"
           >
             <div
-              className={`transition-opacity duration-300 ${
-                isTransitioning ? "opacity-0" : "opacity-100"
-              }`}
+              className={`transition-opacity duration-300 ${isTransitioning ? "opacity-0" : "opacity-100"
+                }`}
             >
               {step === 1 && (
                 <div className="space-y-2">
@@ -184,8 +185,21 @@ const FormLogin: React.FC = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className={`w-full ${error ? "border-red-500" : ""}`}
                   />
+                  <div className="flex justify-end">
+                    <Button
+                      variant="link"
+                      onClick={() => {
+                        // Redireciona para a página de recuperação de senha
+                        router.push("/forgot-password");
+                      }}
+                      className="text-sm p-0 text-primary"
+                    >
+                      Esqueci minha senha
+                    </Button>
+                  </div>
                 </div>
               )}
+
             </div>
             <Button type="submit" variant="indigo" className="w-full">
               {step === 1 ? "Continuar" : "Acessar"}
@@ -193,7 +207,6 @@ const FormLogin: React.FC = () => {
             {step === 1 && (
               <>
                 <Button
-                  // variant="destructive"
                   className="w-full"
                   // onClick={() => alert("Login com Google")}
                   onClick={() => loginGoogle()}
@@ -202,17 +215,17 @@ const FormLogin: React.FC = () => {
                   Continue com Google
                 </Button>
 
-                {/* LINK */}
-                <Link
-                  id="logingoogle"
-                  
-                  className="bg-blue-500"
-                  href={
-                    "https://keycloak.lemonwater-7753b8e7.brazilsouth.azurecontainerapps.io/realms/resolviapp/protocol/openid-connect/auth?response_type=code&client_id=nextjs-google&state=0264e093-4bb8-4146-a75f-1f0146b02596&redirect_uri=http://localhost:3000/callback&kc_idp_hint=google&scope=openid profile email"
-                  }
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    window.location.href =
+                      "https://keycloak.lemonwater-7753b8e7.brazilsouth.azurecontainerapps.io/realms/resolviapp/protocol/openid-connect/auth?response_type=code&client_id=nextjs-google&state=0264e093-4bb8-4146-a75f-1f0146b02596&redirect_uri=http://localhost:3000/callback&kc_idp_hint=google&scope=openid profile email";
+                  }}
+                  className="p-0"
                 >
-                  Login com o google
-                </Link>
+                  Login com o Google
+                </Button>
+
               </>
             )}
             {step === 2 && (

@@ -1,39 +1,61 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useToast } from '@/hooks/use-toast';
-import FormLogin from '@/components/organisms/FormLogin/FormRegister';
-import Carrosel from '@/components/organisms/FormLogin/Carrosel';
+import React from "react";
+import { Input } from "@/components/ui/input";
+import MenuCompleto from "@/components/organisms/MenuCompleto";
+import { FaHome } from "react-icons/fa";
+import { BsChatLeftText } from "react-icons/bs";
+import { MdMoreHoriz } from "react-icons/md";
+import { FiSearch } from "react-icons/fi";
+import { Button } from "@/components/ui/button";
+import CarouselHome1 from "@/components/organisms/CarouselHome1";
 
 const HomePage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isLoggingIn, setIsLoggingIn] = useState(false);
-    const [accessToken, setAccessToken] = useState(null);
-
-    const { toast } = useToast();
-    const router = useRouter();
-
-    useEffect(() => {
-        // Recupera o access_token do localStorage apenas no lado do cliente
-        const token = localStorage.getItem('access_token');
-        setAccessToken(token);
-    },[])
-
     return (
-        <div className="flex h-screen ">
-            {/* Coluna esquerda com a logo, com fundo translúcido opcional */}
-        <div className="flex w-screen flex-col items-center justify-center bg-slate-300" >
+        <>
+            {/* Menu fixo no topo */}
+            <MenuCompleto />
 
-        <div>
-      Você está logado!
-      {accessToken && <p>Access Token: {accessToken}</p>}
-      </div>
-                <FormLogin />
-                
-                <Carrosel />
+            {/* Divisão da página */}
+            <div className="flex min-h-screen">
+                {/* Menu lateral flutuante */}
+                <aside
+                    className="w-16 h-fit bg-gray-900 text-white flex flex-col items-center py-4 space-y-4 sticky top-1/2 transform -translate-y-1/2 rounded-xl shadow-lg ml-4"
+                >
+                    <Button className="p-3 hover:hover:bg-indigo-800">
+                        <FaHome size={20} />
+                    </Button>
+                    <Button className="p-3 hover:bg-indigo-800">
+                        <BsChatLeftText size={20} />
+                    </Button>
+                    <Button className="p-3 hover:bg-indigo-800">
+                        <MdMoreHoriz size={20} />
+                    </Button>
+                </aside>
+
+                {/* Conteúdo principal */}
+                <main className="flex-1 bg-white p-6 overflow-y-auto ml-4">
+                    <div className="space-y-4">
+                        {/* Chamando o componente de carrossel */}
+                        <CarouselHome1 />
+                        {/* Imagem principal */}
+                        <img
+                            src="/img/resolvemos2.png"
+                            alt="Propaganda 1"
+                            className="object-cover w-full h-56 rounded-lg"
+                        />
+                        {/* Input de busca */}
+                        <div className="relative flex items-center w-full max-w-3xl mx-auto">
+                            <FiSearch className="absolute left-4 text-gray-500" size={20} />
+                            <Input
+                                type="text"
+                                placeholder="Procure o que você deseja resolver"
+                                className="pl-12 pr-4 py-6 text-lg border-2 border-purple-500 rounded-md focus:ring-2 focus:ring-purple-500"
+                            />
+                        </div>
+                    </div>
+                </main>
             </div>
-        </div >
+        </>
     );
 };
 
