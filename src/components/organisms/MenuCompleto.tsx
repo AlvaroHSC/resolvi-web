@@ -2,18 +2,12 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { FaSignInAlt } from "react-icons/fa"; // Ícone de login
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const MenuCompleto: React.FC = () => {
   const router = useRouter();
@@ -25,87 +19,37 @@ const MenuCompleto: React.FC = () => {
   };
 
   return (
-    <div className="flex h-16 items-center px-4 bg-black">
+    <div className="flex h-24 items-center px-20 bg-black justify-between">
       {/* Logo */}
       <a href="/" className="flex items-center">
         <img
           src="/img/logo.svg"
           alt="Resolvi Logo"
-          className="w-32 h-auto mx-20"
+          className="w-32 h-auto"
         />
       </a>
 
       {/* Links de navegação */}
-      {/* <nav className="flex items-center space-x-6 ml-6">
+      <nav className="flex items-center space-x-8 text-lg">
         <a
-          href="/dashboard"
-          className="text-white text-sm font-semibold hover:text-purple-500"
+          href="/"
+          className="text-white font-semibold hover:text-indigo-500"
         >
-          Menu 1
+          Seja um profissional
         </a>
         <a
-          href="/pedidos"
-          className="text-white text-sm font-semibold hover:text-purple-500"
+          href="/"
+          className="text-white font-semibold hover:text-indigo-500"
         >
-          Menu 2
+          Como funciona?
         </a>
         <a
-          href="/cardapio"
-          className="text-white text-sm font-semibold hover:text-purple-500"
+          href="/"
+          className="flex items-center text-white font-semibold hover:text-indigo-500"
         >
-          Menu 3
+          <FaSignInAlt className="mr-2" /> Entrar
         </a>
-      </nav> */}
-
-      {/* Avatar e menu dropdown */}
-      <div className="ml-auto flex items-center mx-12">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div className="relative h-10 w-10 rounded-full cursor-pointer">
-              <Avatar>
-                {user.avatarUrl ? (
-                  <AvatarImage src={user.avatarUrl} alt={user.nome} />
-                ) : (
-                  <AvatarFallback>
-                    {user.nome
-                      .split(" ")
-                      .slice(0, 2)
-                      .map((name) => name.charAt(0).toUpperCase())
-                      .join("")}
-                  </AvatarFallback>
-                )}
-              </Avatar>
-            </div>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent className="w-48" align="end" forceMount>
-            <div className="px-4 py-2">
-              <p className="text-sm font-bold">{user.nome}</p>
-              <p className="text-xs text-muted-foreground">{user.email}</p>
-            </div>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => alert("Gerenciar Informações")}
-              className="hover:bg-purple-500 hover:text-white"
-            >
-              Gerenciar Informações
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => alert("Alterar Senha")}
-              className="hover:bg-purple-500 hover:text-white"
-            >
-              Alterar Senha
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => alert("Logout")}
-              className="hover:bg-purple-500 hover:text-white"
-            >
-              Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+      </nav>
     </div>
   );
 };

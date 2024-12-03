@@ -10,7 +10,7 @@ import {
 
 const CarouselHome1 = () => {
   return (
-    <div className="w-3/4 h-64 mx-auto mb-10">
+    <div className="w-2/4 h-64 mx-auto mb-10">
       {/* Componente de carrossel */}
       <Carousel>
         <CarouselContent>
