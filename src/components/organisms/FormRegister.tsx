@@ -128,7 +128,9 @@ const FormRegister: React.FC = () => {
 
   function loginGoogle() {
     let log_google = document.querySelector("#logingoogle");
-    log_google.click();
+    if (log_google) {
+      (log_google as HTMLElement).click();
+    }
   }
 
   return (
@@ -136,7 +138,7 @@ const FormRegister: React.FC = () => {
       <CardHeader>
         <CardTitle className="text-4xl font-bold">Crie sua conta</CardTitle>
         <p className="text-base">
-          Já tem uma conta?
+          Já tem uma conta?{" "}
           <Button
             variant="link"
             onClick={() => router.push("/login")}
@@ -188,11 +190,11 @@ const FormRegister: React.FC = () => {
 
               <div style={{ fontSize: '10px', fontWeight: 'bold' }}>
                 <p>Sua senha deve conter: </p>
-                {/* <ul> */}
+                <ul>
                   <li>Um caracter especial</li>
                   <li>Uma letra maiuscula</li>
                   <li>Um número</li>
-                {/* </ul> */}
+                </ul>
               </div>
             </div>
             {/* )} */}

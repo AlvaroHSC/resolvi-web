@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import FormLogin from '@/components/organisms/FormLogin';
+import FormForgotPassword from '@/components/organisms/FormForgotPassword';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -28,7 +28,7 @@ const LoginPage = () => {
 
             {/* Coluna direita com um contêiner menor para o formulário de login */}
             <div className="flex items-center justify-center w-1/2 h-full bg-black bg-opacity-50">
-                <FormLogin />
+                <FormForgotPassword />
             </div>
         </div >
     );
