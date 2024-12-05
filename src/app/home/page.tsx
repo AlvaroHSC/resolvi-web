@@ -13,6 +13,7 @@ import MenuCategoria from "@/components/organisms/MenuCategoria";  // Importando
 import { CarouselWorkers } from "@/components/organisms/CarouselWorkers";
 import DownloadAppSection from "@/components/organisms/DownloadAppSection";
 import InsetHome1 from "@/components/organisms/InsetHome";
+import ServicesSection from "@/components/organisms/ServicesSection";
 
 const HomePage = () => {
     return (
@@ -91,6 +92,10 @@ const HomePage = () => {
 
                             {/* Componente de Carousel de Profissionais */}
                             <InsetHome1 />
+                        </div>
+
+                        <div>
+                            <ServicesSection />
                         </div>
                     </div>
                 </main>
