@@ -12,6 +12,8 @@ import TagsPopulares from "@/components/organisms/TagsPopulares";
 import MenuCategoria from "@/components/organisms/MenuCategoria";  // Importando MenuCategoria
 import { CarouselWorkers } from "@/components/organisms/CarouselWorkers";
 import DownloadAppSection from "@/components/organisms/DownloadAppSection";
+import InsetHome1 from "@/components/organisms/InsetHome";
+import ServicesSection from "@/components/organisms/ServicesSection";
 
 const HomePage = () => {
     return (
@@ -68,6 +70,32 @@ const HomePage = () => {
                         </div>
                         <div>
                             <DownloadAppSection />
+                        </div>
+
+                        <div className="bg-slate-100 py-6 mb-4">
+                            {/* Componente de Categorias */}
+                            <div className="text-center">
+                                <h1 className="text-3xl font-bold text-gray-900">Pedidos mais frequentes</h1>
+                                <h2 className="text-xl text-gray-900 mt-2">Mais de 30 pedidos realizados por dia</h2>
+                            </div>
+
+                            {/* Componente de Carousel de Profissionais */}
+                            <CarouselWorkers />
+                        </div>
+
+                        <div className=" py-6 mb-4">
+                            {/* Componente de Categorias */}
+                            <div className="text-center">
+                                <h1 className="text-3xl font-bold text-gray-900">Dicas antes de contratar </h1>
+                                <h2 className="text-xl text-gray-900 mt-2">Informações sobre diversos tipos de serviços e como são executados</h2>
+                            </div>
+
+                            {/* Componente de Carousel de Profissionais */}
+                            <InsetHome1 />
+                        </div>
+
+                        <div>
+                            <ServicesSection />
                         </div>
                     </div>
                 </main>
