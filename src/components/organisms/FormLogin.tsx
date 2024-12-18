@@ -11,12 +11,13 @@ import { useRouter } from "next/navigation";
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import Link from "next/link";
+
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
+import firebaseConfig from "../../../firebaseinitialize";
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 // const defaultOptions = {
 //     loop: true,
@@ -32,11 +33,33 @@ const FormLogin: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
-  const [checked, setChecked] = useState<boolean>(false);
+  //const [checked, setChecked] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1); // 1 for email, 2 for password
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false); // Estado para controle de transição
   const { toast } = useToast();
   const router = useRouter();
+
+  initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  const loginWithGoogle = async () => {
+    await signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+   
+      const user = result.user;
+      console.log("user: " + user);
+      console.log("token: " + token)
+   
+      router.push("/home")
+    }).catch((error) => {
+        console.log(error)
+    });
+  }
+
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,23 +97,6 @@ const FormLogin: React.FC = () => {
     // Exemplo: login(email, password).then(() => router.push('/dashboard'));
   };
 
-  //Logar
-  async function getUserPermissions() {
-    try {
-      const response = await axios.get("/user?ID=12345");
-
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function loginGoogle() {
-    let log_google = document.querySelector('#logingoogle');
-    if (log_google) {
-      (log_google as HTMLElement).click();
-    }
-  }
 
   return (
     <Card className="w-full bg-white max-w-lg mx-auto p-6">
@@ -142,7 +148,7 @@ const FormLogin: React.FC = () => {
               type="submit"
               variant="default"
               className="w-full"
-              onClick={() => setChecked(true)}
+              //onClick={() => setChecked(true)}
             >
               Continuar
             </Button>
@@ -204,47 +210,20 @@ const FormLogin: React.FC = () => {
             <Button type="submit" variant="indigo" className="w-full">
               {step === 1 ? "Continuar" : "Acessar"}
             </Button>
-            {step === 1 && (
-              <>
-                <Button
-                  className="w-full"
-                  // onClick={() => alert("Login com Google")}
-                  onClick={() => loginGoogle()}
-                >
-                  <FcGoogle />
-                  Continue com Google
-                </Button>
 
-                <Button
-                  variant="link"
-                  onClick={() => {
-                    window.location.href =
-                      "https://keycloak.lemonwater-7753b8e7.brazilsouth.azurecontainerapps.io/realms/resolviapp/protocol/openid-connect/auth?response_type=code&client_id=nextjs-google&state=0264e093-4bb8-4146-a75f-1f0146b02596&redirect_uri=http://localhost:3000/callback&kc_idp_hint=google&scope=openid profile email";
-                  }}
-                  className="p-0"
-                >
-                  Login com o Google
-                </Button>
-
-              </>
-            )}
-            {step === 2 && (
-              <Button
-                variant="outline"
-                className="w-full text-left"
-                onClick={() => {
-                  setIsTransitioning(true); // Começa a transição
-                  setTimeout(() => {
-                    setStep(1); // Volta para o passo 1
-                    setIsTransitioning(false); // Finaliza a transição
-                  }, 300); // Duração da transição
-                }}
-              >
-                Voltar
-              </Button>
-            )}
           </form>
+
         )}
+                                <>
+                        <Button
+                          className="w-full"
+                          // onClick={() => alert("Login com Google")}
+                          onClick={() => loginWithGoogle()}
+                        >
+                          <FcGoogle />
+                          Continue com Google
+                        </Button>
+                      </>
       </CardContent>
     </Card>
   );
