@@ -17,7 +17,7 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import firebaseConfig from "../../../firebaseinitialize";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 // const defaultOptions = {
 //     loop: true,
@@ -40,7 +40,9 @@ const FormLogin: React.FC = () => {
   const router = useRouter();
 
   initializeApp(firebaseConfig);
+
   const auth = getAuth();
+
   const provider = new GoogleAuthProvider();
 
   const loginWithGoogle = async () => {
@@ -57,6 +59,21 @@ const FormLogin: React.FC = () => {
       router.push("/home")
     }).catch((error) => {
         console.log(error)
+    });
+  }
+
+  const loginWithEmail = async () => {
+    await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user)
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage)
     });
   }
 
@@ -92,9 +109,10 @@ const FormLogin: React.FC = () => {
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoggingIn(true);
-    // Aqui você faria a chamada à API para login
-    // Exemplo: login(email, password).then(() => router.push('/dashboard'));
+    console.log("email: " + email)
+    console.log("senha: " + password)
+    //setIsLoggingIn(true);
+    loginWithEmail();
   };
 
 
