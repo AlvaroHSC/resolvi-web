@@ -13,6 +13,7 @@ import MenuCategoria from "@/components/organisms/MenuCategoria";  // Importando
 import { CarouselWorkers } from "@/components/organisms/CarouselWorkers";
 import DownloadAppSection from "@/components/organisms/DownloadAppSection";
 import InfoSection from "@/components/organisms/InfoSection";
+import { DataTableDemo } from "@/components/organisms/ListaInfo";
 
 const InfoPage = () => {
     return (
@@ -56,6 +57,8 @@ const InfoPage = () => {
 
                         {/* Componente de Tags Populares */}
                         <TagsPopulares />
+
+                        <DataTableDemo/>
 
                         <div className="bg-slate-100 py-6 mb-4">
                             {/* Componente de Categorias */}
