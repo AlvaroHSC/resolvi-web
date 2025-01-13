@@ -36,47 +36,53 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
+const data: Servicos[] = [
+  {
+    id: "m5gr29i9",
+    preco: 316,
+    status: "pendente",
+    cliente: "ken99@yahoo.com",
+  },
   {
     id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
+    preco: 316,
+    status: "feito",
+    cliente: "ken99@yahoo.com",
   },
   {
     id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
+    preco: 242,
+    status: "feito",
+    cliente: "Abe45@gmail.com",
   },
   {
     id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
+    preco: 837,
+    status: "solicitado",
+    cliente: "Monserrat44@gmail.com",
   },
   {
     id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
+    preco: 874,
+    status: "feito",
+    cliente: "Silas22@gmail.com",
   },
   {
     id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
+    preco: 721,
+    status: "cancelado",
+    cliente: "carmella@hotmail.com",
   },
 ]
 
-export type Payment = {
+export type Servicos = {
   id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+  preco: number
+  status: "pendente" | "solicitado" | "feito" | "cancelado"
+  cliente: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Servicos>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -107,31 +113,31 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "cliente",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Cliente
           <ArrowUpDown />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue("cliente")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "preco",
+    header: () => <div className="text-right">Preço</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
+      const preco = parseFloat(row.getValue("preco"))
 
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
+      // Format the preco as a dollar preco
+      const formatted = new Intl.NumberFormat("pt-BR", {
         style: "currency",
-        currency: "USD",
-      }).format(amount)
+        currency: "BRL",
+      }).format(preco)
 
       return <div className="text-right font-medium">{formatted}</div>
     },
@@ -140,7 +146,7 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const Servicos = row.original
 
       return (
         <DropdownMenu>
@@ -151,15 +157,15 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Opções</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(Servicos.id)}
             >
-              Copy payment ID
+              Copiar ID do serviço
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Ver Cliente</DropdownMenuItem>
+            <DropdownMenuItem>Ver detalhes do serviço</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -199,10 +205,10 @@ export function DataTableDemo() {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filtrar clientes..."
+          value={(table.getColumn("cliente")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("cliente")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -285,8 +291,8 @@ export function DataTableDemo() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredSelectedRowModel().rows.length} da(s) {" "}
+          {table.getFilteredRowModel().rows.length} linha(s)  foi selecionada(s).
         </div>
         <div className="space-x-2">
           <Button
